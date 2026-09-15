@@ -32,7 +32,7 @@ The lines that end in diamonds represent composition. For example, `ClassRosterC
 
 ## 5. Inheritance Relationships
 
-The line ending in the arrowhead represents inheritance. Here, our `ClassRosterDaoException` extends `Exception`.
+The line ending in the arrowhead represents inheritance. Here, our `ClassRosterPersistenceException` extends `Exception`.
 
 Keep this diagram in mind as we build the application — we'll see all of the implementation details as we go.
 
