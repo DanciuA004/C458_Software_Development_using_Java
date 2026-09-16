@@ -1,7 +1,10 @@
-package com.mthree.intermediate_java.class_roster.dto;
+package com.mthree.intermediate_java.class_roster.java.dto;
 
 import java.util.Objects;
 
+/**
+ *  Student Object
+ */
 public class Student {
     private String firstName;
     private String lastName;

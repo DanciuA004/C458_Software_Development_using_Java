@@ -1,4 +1,4 @@
-package com.mthree.intermediate_java.class_roster.ui;
+package com.mthree.intermediate_java.class_roster.java.ui;
 
 public interface UserIO {
     void print(String msg);

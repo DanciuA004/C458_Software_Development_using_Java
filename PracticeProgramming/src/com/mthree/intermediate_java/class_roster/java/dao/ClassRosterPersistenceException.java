@@ -1,4 +1,4 @@
-package com.mthree.intermediate_java.class_roster.dao;
+package com.mthree.intermediate_java.class_roster.java.dao;
 
 public class ClassRosterPersistenceException extends Exception {
     public ClassRosterPersistenceException(String message) {

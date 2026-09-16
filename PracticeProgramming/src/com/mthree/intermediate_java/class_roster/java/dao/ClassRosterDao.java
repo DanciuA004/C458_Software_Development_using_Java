@@ -1,6 +1,6 @@
-package com.mthree.intermediate_java.class_roster.dao;
+package com.mthree.intermediate_java.class_roster.java.dao;
 
-import com.mthree.intermediate_java.class_roster.dto.Student;
+import com.mthree.intermediate_java.class_roster.java.dto.Student;
 
 import java.util.List;
 

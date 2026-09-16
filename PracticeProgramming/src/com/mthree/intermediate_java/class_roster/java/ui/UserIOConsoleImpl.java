@@ -1,7 +1,10 @@
-package com.mthree.intermediate_java.class_roster.ui;
+package com.mthree.intermediate_java.class_roster.java.ui;
 
 import java.util.Scanner;
 
+/**
+ * This class ensures the user input is sanitised.
+ */
 public class UserIOConsoleImpl implements UserIO {
     Scanner scanner = new Scanner(System.in);
     String inputString;

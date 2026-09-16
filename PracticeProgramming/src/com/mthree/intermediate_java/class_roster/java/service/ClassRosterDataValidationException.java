@@ -1,4 +1,4 @@
-package com.mthree.intermediate_java.class_roster.service;
+package com.mthree.intermediate_java.class_roster.java.service;
 
 public class ClassRosterDataValidationException extends Exception {
 

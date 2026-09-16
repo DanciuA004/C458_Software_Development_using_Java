@@ -1,8 +1,8 @@
 package com.mthree.intermediate_java.class_roster.tests;
 
-import com.mthree.intermediate_java.class_roster.dao.ClassRosterDao;
-import com.mthree.intermediate_java.class_roster.dao.ClassRosterPersistenceException;
-import com.mthree.intermediate_java.class_roster.dto.Student;
+import com.mthree.intermediate_java.class_roster.java.dao.ClassRosterDao;
+import com.mthree.intermediate_java.class_roster.java.dao.ClassRosterPersistenceException;
+import com.mthree.intermediate_java.class_roster.java.dto.Student;
 
 import java.util.ArrayList;
 import java.util.List;

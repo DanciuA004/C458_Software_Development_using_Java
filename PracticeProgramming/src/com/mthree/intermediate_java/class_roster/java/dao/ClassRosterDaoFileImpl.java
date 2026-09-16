@@ -1,6 +1,6 @@
-package com.mthree.intermediate_java.class_roster.dao;
+package com.mthree.intermediate_java.class_roster.java.dao;
 
-import com.mthree.intermediate_java.class_roster.dto.Student;
+import com.mthree.intermediate_java.class_roster.java.dto.Student;
 
 import java.io.*;
 import java.util.*;
@@ -10,10 +10,19 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
     public static final String DELIMITER = "::";
     private Map<String, Student> students = new HashMap<>();
 
+    /**
+     * Regular constructor with actual roster file.
+     */
     public ClassRosterDaoFileImpl() {
         ROSTER_FILE = "src/com/mthree/java_classes_and_objects/class_roster/roster.txt";
     }
 
+    /**
+     * For testing.
+     * To not change actual roster
+     *
+     * @param ROSTER_FILE testing roster file
+     */
     public ClassRosterDaoFileImpl(String ROSTER_FILE) {
         this.ROSTER_FILE = ROSTER_FILE;
     }
@@ -28,6 +37,7 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
      * @param student student to be added to the roster
      * @return the Student object previously associated with the given
      * student id if it exists, null otherwise
+     * @throws ClassRosterPersistenceException Failure when trying to write to a file.
      */
     @Override
     public Student addStudent(String studentId, Student student) throws ClassRosterPersistenceException {
@@ -41,6 +51,7 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
      * Returns a List of all Students on the roster.
      *
      * @return Student List containing all students on the roster.
+     * @throws ClassRosterPersistenceException Failure when trying to write to a file.
      */
     @Override
     public List<Student> getAllStudents() throws ClassRosterPersistenceException {
@@ -48,6 +59,13 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
         return new ArrayList(students.values());
     }
 
+    /**
+     * Returns one student from the roster.
+     *
+     * @param studentId ID of the student to retrieve
+     * @return specific Student object
+     * @throws ClassRosterPersistenceException
+     */
     @Override
     public Student getStudent(String studentId) throws ClassRosterPersistenceException {
         loadRoster();
@@ -62,6 +80,7 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
      * @param studentId id of student to be removed
      * @return Student object that was removed or null if no student
      * was associated with the given student id
+     * @throws ClassRosterPersistenceException Failure when trying to write to a file.
      */
     @Override
     public Student removeStudent(String studentId) throws ClassRosterPersistenceException {
@@ -71,6 +90,14 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
         return removedStudent;
     }
 
+    /**
+     * This method takes in a string from a file.
+     * Splits all of the information,
+     * and creates a Student object from it to return.
+     *
+     * @param studentAsText Student object as text from a file.
+     * @return Student object
+     */
     private Student unmarshallStudent(String studentAsText){
         // studentAsText is expecting a line read in from our file.
         // For example, it might look like this:
@@ -110,6 +137,12 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
         return studentFromFile;
     }
 
+    /**
+     * This method populates students by reading a file line by line,
+     * unmarshalling students and adding them to students.
+     *
+     * @throws ClassRosterPersistenceException Failure when trying to write to a file.
+     */
     private void loadRoster() throws ClassRosterPersistenceException {
         Scanner scanner;
 
@@ -120,7 +153,7 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
                             new FileReader(ROSTER_FILE)));
         } catch (FileNotFoundException e) {
             throw new ClassRosterPersistenceException(
-                    "-_- Could not load roster data into memory.", e);
+                    "Could not load roster data into memory.", e);
         }
 
         // currentLine holds the most recent line read from the file
@@ -146,6 +179,13 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
         scanner.close();
     }
 
+    /**
+     * Takes in a Student object and marshalls it into a formatted String
+     * to add to a file.
+     *
+     * @param aStudent a Student object
+     * @return the Student object in string form
+     */
     private String marshallStudent(Student aStudent){
         // We need to turn a Student object into a line of text for our file.
         // For example, we need an in memory object to end up like this:
@@ -173,8 +213,8 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
     }
 
     /**
-     * Writes all students in the roster out to a ROSTER_FILE.  See loadRoster
-     * for file format.
+     * Writes all students in the roster out to a ROSTER_FILE.
+     * See loadRoster for file format.
      *
      * @throws ClassRosterPersistenceException if an error occurs writing to the file
      */

@@ -1,7 +1,7 @@
 package com.mthree.intermediate_java.class_roster.tests;
 
-import com.mthree.intermediate_java.class_roster.dao.ClassRosterAuditDao;
-import com.mthree.intermediate_java.class_roster.dao.ClassRosterPersistenceException;
+import com.mthree.intermediate_java.class_roster.java.dao.ClassRosterAuditDao;
+import com.mthree.intermediate_java.class_roster.java.dao.ClassRosterPersistenceException;
 
 public class ClassRosterAuditDaoStubImpl implements ClassRosterAuditDao {
 

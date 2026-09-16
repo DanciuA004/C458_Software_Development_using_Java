@@ -1,7 +1,7 @@
-package com.mthree.intermediate_java.class_roster.service;
+package com.mthree.intermediate_java.class_roster.java.service;
 
-import com.mthree.intermediate_java.class_roster.dao.ClassRosterPersistenceException;
-import com.mthree.intermediate_java.class_roster.dto.Student;
+import com.mthree.intermediate_java.class_roster.java.dao.ClassRosterPersistenceException;
+import com.mthree.intermediate_java.class_roster.java.dto.Student;
 
 import java.util.List;
 

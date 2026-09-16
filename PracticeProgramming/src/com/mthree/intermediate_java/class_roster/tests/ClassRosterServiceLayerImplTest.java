@@ -1,13 +1,13 @@
 package com.mthree.intermediate_java.class_roster.tests;
 
-import com.mthree.intermediate_java.class_roster.dao.ClassRosterAuditDao;
-import com.mthree.intermediate_java.class_roster.dao.ClassRosterDao;
-import com.mthree.intermediate_java.class_roster.dao.ClassRosterPersistenceException;
-import com.mthree.intermediate_java.class_roster.dto.Student;
-import com.mthree.intermediate_java.class_roster.service.ClassRosterDataValidationException;
-import com.mthree.intermediate_java.class_roster.service.ClassRosterDuplicateIdException;
-import com.mthree.intermediate_java.class_roster.service.ClassRosterServiceLayer;
-import com.mthree.intermediate_java.class_roster.service.ClassRosterServiceLayerImpl;
+import com.mthree.intermediate_java.class_roster.java.dao.ClassRosterAuditDao;
+import com.mthree.intermediate_java.class_roster.java.dao.ClassRosterDao;
+import com.mthree.intermediate_java.class_roster.java.dao.ClassRosterPersistenceException;
+import com.mthree.intermediate_java.class_roster.java.dto.Student;
+import com.mthree.intermediate_java.class_roster.java.service.ClassRosterDataValidationException;
+import com.mthree.intermediate_java.class_roster.java.service.ClassRosterDuplicateIdException;
+import com.mthree.intermediate_java.class_roster.java.service.ClassRosterServiceLayer;
+import com.mthree.intermediate_java.class_roster.java.service.ClassRosterServiceLayerImpl;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;

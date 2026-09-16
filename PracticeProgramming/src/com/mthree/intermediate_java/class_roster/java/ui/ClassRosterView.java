@@ -1,6 +1,6 @@
-package com.mthree.intermediate_java.class_roster.ui;
+package com.mthree.intermediate_java.class_roster.java.ui;
 
-import com.mthree.intermediate_java.class_roster.dto.Student;
+import com.mthree.intermediate_java.class_roster.java.dto.Student;
 
 import java.util.List;
 
@@ -11,6 +11,11 @@ public class ClassRosterView {
         this.io = io;
     }
 
+    /**
+     * Prints the main menu and returns the user's option.
+     *
+     * @return User's choice from menu
+     */
     public int printMenuAndGetSelection() {
         io.print("Main Menu");
         io.print("1. List Students");
@@ -22,6 +27,12 @@ public class ClassRosterView {
         return io.readInt("Please select from the above choices: ", 1, 5);
     }
 
+    /**
+     *  Takes in the whole roster of Students and prints them out,
+     *  one by one and formatted.
+     *
+     * @param studentList A list of Student objects
+     */
     public void displayStudentList(List<Student> studentList) {
         for (Student currentStudent : studentList) {
             String studentInfo = String.format("#%s : %s %s",
@@ -33,6 +44,11 @@ public class ClassRosterView {
         io.readString("Please hit enter to continue.");
     }
 
+    /**
+     * Asks the user for information on the new student they want to add.
+     *
+     * @return Student object
+     */
     public Student getNewStudentInfo() {
         String studentId = io.readString("Please enter Student ID: ");
         String firstName = io.readString("Please enter First Name: ");
@@ -47,10 +63,19 @@ public class ClassRosterView {
         return currentStudent;
     }
 
+    /**
+     * Asks the user for the Student ID they want.
+     * @return Student ID
+     */
     public String getStudentIdChoice() {
         return io.readString("Please enter the Student ID: ");
     }
 
+    /**
+     * Takes in a student object and displays it formatted.
+     *
+     * @param student Student object
+     */
     public void displayStudent(Student student) {
         if (student != null) {
             io.print(student.getStudentId());
@@ -63,6 +88,11 @@ public class ClassRosterView {
         io.readString("Please hit enter to continue.");
     }
 
+    /**
+     * Tells the user if the Student was successfully removed or not.
+     *
+     * @param studentRecord
+     */
     public void displayRemoveResult(Student studentRecord) {
         if(studentRecord != null){
             io.print("Student successfully removed.");
