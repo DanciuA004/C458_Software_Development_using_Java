@@ -1,7 +1,12 @@
 package com.wiley_edge_corp.flooring_mastery.controller;
 
+import com.wiley_edge_corp.flooring_mastery.model.Order;
+import com.wiley_edge_corp.flooring_mastery.model.Product;
+import com.wiley_edge_corp.flooring_mastery.model.Tax;
 import com.wiley_edge_corp.flooring_mastery.service.ServiceLayer;
 import com.wiley_edge_corp.flooring_mastery.view.View;
+
+import java.util.List;
 
 /**
  * Handles Main Menu choices and coordinates and delegates other work.
@@ -20,7 +25,7 @@ public class Controller {
         int choice = -1;
 
         while (choice != 0) {
-            choice = getChoice();
+            choice = getMenuSelection();
 
             switch (choice) {
                 case 1:
@@ -47,8 +52,8 @@ public class Controller {
         }
     }
 
-    private int getChoice() {
-        return view.viewMenuAndGetChoice();
+    private int getMenuSelection() {
+        return view.displayMainMenuAndGetSelection();
 
     }
 
@@ -59,6 +64,28 @@ public class Controller {
 
     private void addOrder() {
         view.viewAddOrderBanner();
+        boolean hasError = false;
+
+        List<Tax> taxes = service.getTaxes();
+        List<Product> products = service.getProducts();
+
+        do {
+            // Get initial order information
+            Order order = view.getAddOrderInput(taxes, products);
+            // Write rest of calculation heavy order information
+            service.addOrder(order);
+            // Display order and get confirmation
+            view.displayOrderInfo(order);
+            boolean confirm = view.getConfirmation();
+
+            if (confirm) {
+                // Send object order to orderDao this time to be saved
+                service.addOrder(order);
+                view.viewSuccessAddOrder();
+            } else {
+                break;
+            }
+        } while (hasError);
 
     }
 

@@ -13,18 +13,18 @@ public interface ServiceLayer {
 
     public Order addOrder(Order order);
 
+    public Order getOrder(LocalDate date, int orderNumber);
+
     public Order editOrder(LocalDate date, int orderNumber);
+
+    public List<Order> getOrdersForDate(LocalDate date);
 
     public Order removeOrder(LocalDate date, int orderNumber);
 
-    public Order getOrder(LocalDate date, int orderNumber);
-
-    public List<Order> getOrdersForDate(LocalDate date);
+    public void exportAllData();
 
     public List<Tax> getTaxes();
 
     public List<Product> getProducts();
-
-    public void exportAllData();
 
 }
