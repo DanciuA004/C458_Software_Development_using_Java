@@ -7,6 +7,7 @@ import com.wiley_edge_corp.flooring_mastery.model.Tax;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 /**
@@ -37,9 +38,20 @@ public class View {
     }
 
     public LocalDate getDateInput() {
-        String date = io.readString("Enter Date: ");
+        String dateString = io.readString("Enter Date: ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
-        return LocalDate.parse(date, formatter);
+
+        try {
+            return LocalDate.parse(dateString, formatter);
+        } catch (DateTimeParseException e) {
+            io.print("Please enter a valid date.");
+        }
+        return null;
+    }
+
+    public void viewIncorrectDateInput() {
+        io.print("Order date must be later than today.");
+
     }
 
     // ######### DISPLAY ORDERS  #########
@@ -75,15 +87,16 @@ public class View {
      *     Product Type – Show a list of available products and pricing information to choose from.
      *     Area – The area must be a positive decimal. Minimum order size is 100 sq ft.
      *
-     * The remaining fields are calculated from the user entry and the tax/product information in the files.
-     *
      * @param taxes a list of all the available tax rates
      * @param products a list of all the available products
      * @return the Order object that was added
      */
     public Order getAddOrderInput(List<Tax> taxes, List<Product> products) {
         // Date
-        LocalDate date = getDateInput();
+        LocalDate date;
+        do {
+            date = getDateInput();
+        } while (date == null);
 
         // Name
         String name;
@@ -226,12 +239,13 @@ public class View {
      * @return the name if it is valid, null otherwise
      */
     public String validateNameInput(String name) {
-        String regex = "[a-zA-Z0-9]*[.]*,*[a-zA-Z0-9]*";
+        String regex = "^(?=.*[a-zA-Z0-9])[a-zA-Z0-9., ]+$";
 
         if (name.matches(regex)) {
             return name;
         }
 
+        io.print("Invalid Name.");
         io.print("Please enter a valid Name.");
         return null;
     }
@@ -240,35 +254,37 @@ public class View {
      * Entered states must be checked against the tax file.
      * If the state does not exist in the tax file, we cannot sell there.
      *
-     * @param state the state to validate
+     * @param stateString the state to validate
      * @param taxes the list of States to validate against
      * @return the state if it is valid, null otherwise
      */
-    public Tax validateStateInput(String stateUser, List<Tax> taxes) {
+    public Tax validateStateInput(String stateString, List<Tax> taxes) {
         for  (Tax tax : taxes) {
-            if (tax.getStateName().equals(stateUser)) {
+            if (tax.getStateName().equals(stateString)) {
                 return tax;
             }
         }
 
-        io.print("We cannot sell to that state.");
+        io.print("Invalid State.");
+        io.print("We do not sell to that state.");
         return null;
     }
 
     /**
      * The product inputted must be one we sell.
      *
-     * @param productUser the product the user inputted
+     * @param productString the product the user inputted
      * @param products the list of all products we offer to validate from
      * @return product object if exists, null else
      */
-    public Product validateProductInput(String productUser, List<Product> products) {
+    public Product validateProductInput(String productString, List<Product> products) {
         for (Product product : products) {
-            if (product.getProductType().equals(productUser)) {
+            if (product.getProductType().equals(productString)) {
                 return product;
             }
         }
 
+        io.print("Invalid product.");
         io.print("We do not sell to that product.");
         return null;
     }
@@ -277,8 +293,8 @@ public class View {
      * The area must be a positive decimal.
      * Minimum order size is 100 sq ft.
      *
-     * @param area
-     * @return
+     * @param areaString the area input from the user
+     * @return BigDecimal return BigDecimal object if valid, null if not
      */
     public BigDecimal validateAreaInput(String areaString) {
         BigDecimal area = new BigDecimal(areaString);
@@ -286,10 +302,11 @@ public class View {
         if (areaString.trim().equals("")) {
             io.print("Please enter a valid area");
             return null;
-        } else if (area.intValue() > 100) {
+        } else if (area.intValue() >= 100) {
             return  area;
         }
 
+        io.print("Invalid area.");
         io.print("Minimum order size is 100 sq ft.");
         return null;
     }

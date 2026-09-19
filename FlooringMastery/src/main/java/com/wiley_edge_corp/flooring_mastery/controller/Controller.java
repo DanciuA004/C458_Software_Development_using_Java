@@ -64,29 +64,29 @@ public class Controller {
 
     private void addOrder() {
         view.viewAddOrderBanner();
-        boolean hasError = false;
 
         List<Tax> taxes = service.getTaxes();
         List<Product> products = service.getProducts();
 
-        do {
-            // Get initial order information
-            Order order = view.getAddOrderInput(taxes, products);
-            // Write rest of calculation heavy order information
+        // Get initial order information
+        Order order = view.getAddOrderInput(taxes, products);
+
+        // Validate Date
+        // Write rest of calculation heavy order information
+        while (service.addOrder(order) == null) {
+            view.viewIncorrectDateInput();
+            order = view.getAddOrderInput(taxes, products);
+        }
+
+        // Display order and get confirmation
+        view.displayOrderInfo(order);
+        boolean confirm = view.getConfirmation();
+
+        if (confirm) {
+            // Send object order to orderDao, this time to be saved
             service.addOrder(order);
-            // Display order and get confirmation
-            view.displayOrderInfo(order);
-            boolean confirm = view.getConfirmation();
-
-            if (confirm) {
-                // Send object order to orderDao this time to be saved
-                service.addOrder(order);
-                view.viewSuccessAddOrder();
-            } else {
-                break;
-            }
-        } while (hasError);
-
+            view.viewSuccessAddOrder();
+        }
     }
 
     public void editOrder() {

@@ -14,8 +14,8 @@ import java.util.Map;
 public class OrderDaoFileImpl implements OrderDao{
     private static final String ORDER_FOLDER = "orders";
     private static final String DELIMITER = ",";
-    Map<LocalDate, Map<Integer, Order>> orders =  new HashMap<>();
-    int largestOrderNumber = -1;
+    private Map<LocalDate, Map<Integer, Order>> orders =  new HashMap<>();
+    private int largestOrderNumber = -1;
 
     private void writeToFile() {
 
@@ -50,8 +50,6 @@ public class OrderDaoFileImpl implements OrderDao{
         out.close();
     }
 
-
-
     private void loadFromFile() {
 
 
@@ -59,7 +57,10 @@ public class OrderDaoFileImpl implements OrderDao{
 
     @Override
     public int getNextOrderNumber() {
-        return ++largestOrderNumber;
+        return orders.values().stream()
+                .flatMap(map -> map.keySet().stream())
+                .max(Integer::compareTo)
+                .orElse(-1) + 1;
     }
 
     @Override
@@ -75,10 +76,12 @@ public class OrderDaoFileImpl implements OrderDao{
         ordersOnDate.put(order.getOrderNumber(), order);
 
         // Write to file
-        try {
-            appendToFile(order);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (order == null) {
+            try {
+                appendToFile(order);
+            } catch (IOException e) {
+
+            }
         }
 
         return order;
@@ -112,5 +115,9 @@ public class OrderDaoFileImpl implements OrderDao{
     public Order removeOrder(LocalDate date, int orderNumber) {
         return null;
 
+    }
+
+    public Map<LocalDate, Map<Integer, Order>> getOrders() {
+        return orders;
     }
 }

@@ -1,1 +1,3 @@
 Write order: Order{orderNumber=0, customerName='Alex', state='Texas', orderDate=2026-09-19, taxRate=4.45, productType='Wood', costPerSquareFoot=5.15, labourCostPerSquareFoot=4.75, materialCost=772.50, area=150, labourCost=712.50, tax=66.08, total=1551.08}
+Write order: Order{orderNumber=0, customerName='John', state='Texas', orderDate=2026-10-20, taxRate=4.45, productType='Tile', costPerSquareFoot=3.50, labourCostPerSquareFoot=4.15, materialCost=700.00, area=200, labourCost=830.00, tax=68.09, total=1598.09}
+Write order: Order{orderNumber=0, customerName='Ale', state='Texas', orderDate=2026-09-19, taxRate=4.45, productType='Carpet', costPerSquareFoot=2.25, labourCostPerSquareFoot=2.10, materialCost=562.50, area=250, labourCost=525.00, tax=48.39, total=1135.89}

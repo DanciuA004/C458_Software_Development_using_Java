@@ -29,15 +29,32 @@ public class ServiceLayerImpl implements ServiceLayer {
         this.taxDao = taxDao;
     }
 
+    /**
+     * Gets the next order number from the orderDao
+     * @return next order number
+     */
     @Override
     public int getNextOrderNumber() {
         return orderDao.getNextOrderNumber();
 
     }
 
+    /**
+     * The first time an order is passed in it will not have all of its field set by the view,
+     * the methods validates the date, if valid, writes the rest of the calculated fields and return object.
+     *
+     * If an order is passed in and the order number is not -1, it means this is a valid order that should have all of its fields,
+     * it will pass it on to orderDao to save to memory.
+     *
+     * @param order order to be validated
+     * @return order if is valid, null otherwise
+     */
     @Override
     public Order addOrder(Order order) {
         if (order.getOrderNumber() == -1) {
+            if (order.getOrderDate().isBefore(LocalDate.now()) || order.getOrderDate().equals(LocalDate.now())) {
+                return null;
+            }
             order.setOrderNumber(getNextOrderNumber());
             // MaterialCost = (Area * CostPerSquareFoot)
             order.setMaterialCost(order.getArea().multiply(order.getCostPerSquareFoot())
