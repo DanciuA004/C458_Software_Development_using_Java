@@ -6,11 +6,13 @@ import com.wiley_edge_corp.flooring_mastery.model.Tax;
 import com.wiley_edge_corp.flooring_mastery.service.ServiceLayer;
 import com.wiley_edge_corp.flooring_mastery.view.View;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Handles Main Menu choices and coordinates and delegates other work.
- * Sit at the top of the project and hands work down to the view and service.
+ * The controller coordinates the application.
+ * It takes in input from the View, decides what needs to happen,
+ * and then calls business logic in the Service layer.
  */
 public class Controller {
     private ServiceLayer service;
@@ -21,6 +23,9 @@ public class Controller {
         this.view = view;
     }
 
+    /**
+     * Main Menu
+     */
     public void run () {
         int choice = -1;
 
@@ -46,25 +51,50 @@ public class Controller {
                 case 0:
                     exitMessage();
                     break;
-                default:
-                    unknownCommand();
             }
         }
     }
 
+    /**
+     * Prints the menu and gets user's choice
+     * @return user's choice
+     */
     private int getMenuSelection() {
         return view.displayMainMenuAndGetSelection();
 
     }
 
+    /**
+     * Displays all orders for a date
+     */
     private void displayOrders() {
         view.viewDisplayOrdersBanner();
 
+        // Date
+        LocalDate date = view.getDateInput();
+        while (date == null) {
+            date = view.getDateInput();
+        }
+
+        // Gets all of the orders for that date
+        List<Order> orders = service.getOrdersForDate(date);
+
+        if (orders == null) {
+            // If there is no order for that date
+            view.viewOrderDoesNotExist();
+        } else {
+            // Displays all of the orders
+            view.displayOrders(orders);
+        }
     }
 
+    /**
+     * Adds an order to orders
+     */
     private void addOrder() {
         view.viewAddOrderBanner();
 
+        // Initiates taxes and products
         List<Tax> taxes = service.getTaxes();
         List<Product> products = service.getProducts();
 
@@ -73,17 +103,16 @@ public class Controller {
 
         // Validate Date
         // Write rest of calculation heavy order information
-        while (service.addOrder(order) == null) {
+        while (service.calculateOrder(order) == null) {
             view.viewIncorrectDateInput();
             order = view.getAddOrderInput(taxes, products);
         }
 
         // Display order and get confirmation
         view.displayOrderInfo(order);
-        boolean confirm = view.getConfirmation();
 
-        if (confirm) {
-            // Send object order to orderDao, this time to be saved
+        if (view.getConfirmation()) {
+            // Once confirmation add order
             service.addOrder(order);
             view.viewSuccessAddOrder();
         }
@@ -91,26 +120,53 @@ public class Controller {
 
     public void editOrder() {
         view.viewEditOrderBanner();
-
+        // EVIIIIILLL
     }
 
+    /**
+     * Remove a specific order using date and order number
+     */
     public void removeOrder() {
         view.viewRemoveOrderBanner();
 
+        // Date
+        LocalDate date = view.getDateInput();
+        while (date == null) {
+            date = view.getDateInput();
+        }
+
+        // Order number
+        int orderNumber =  view.getOrderNumberInput();
+        while (orderNumber == -1) {
+            view.viewIncorrectNumberInput();
+            orderNumber = view.getOrderNumberInput();
+        }
+
+        // Remove order
+        Order order = service.removeOrder(date, orderNumber);
+
+        if (order == null) {
+            // If order does not exist
+            view.viewOrderDoesNotExist();
+        } else {
+            // If order does exist
+            view.viewSuccessExportAllData();
+        }
     }
 
+    /**
+     * Exports all orders to an external file
+     */
     public void exportAllData() {
         view.viewExportAllDataBanner();
-
+        service.exportAllData();
     }
 
+    /**
+     * Tell user goodbye when they exit the application
+     */
     private void exitMessage() {
         view.viewExitMessage();
-
-    }
-
-    private void unknownCommand() {
-        view.viewUnknownCommand();
 
     }
 }

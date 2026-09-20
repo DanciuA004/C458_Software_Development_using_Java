@@ -11,8 +11,8 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 
 /**
- * Handles displaying information to the user and getting user options back.
- * Sits between the UserIO and the Controller.
+ * The view handles displaying information to the user,
+ * and receiving information back.
  */
 public class View {
     UserIO io;
@@ -24,6 +24,10 @@ public class View {
 
     // ######### MAIN MENU #########
 
+    /**
+     * Main Menu
+     * @return user's choice
+     */
     public int displayMainMenuAndGetSelection() {
 
         io.print("<< Flooring Program >>");
@@ -37,6 +41,38 @@ public class View {
         return io.readInt("Please enter your choice: ", 0, 6);
     }
 
+    // ######### HELPER FUNCTIONS #########
+
+    /**
+     * Displays a single order's information
+     * @param order order to display
+     */
+    public void displayOrderInfo(Order order) {
+        io.print(order.toString());
+
+    }
+
+    /**
+     * Integer input error message
+     */
+    public void viewIncorrectNumberInput() {
+        io.print("Please enter a valid number.");
+
+    }
+
+    /**
+     * Order Number input from user
+     * @return order number
+     */
+    public int getOrderNumberInput() {
+        return io.readInt("Enter Order Number: ");
+
+    }
+
+    /**
+     * Date input from user
+     * @return date
+     */
     public LocalDate getDateInput() {
         String dateString = io.readString("Enter Date: ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
@@ -49,53 +85,77 @@ public class View {
         return null;
     }
 
+    /**
+     * Date error message
+     */
     public void viewIncorrectDateInput() {
-        io.print("Order date must be later than today.");
+        io.print("Date must be after the current date.");
 
+    }
+
+    /**
+     * Confirmation from user to continue
+     * @return boolean
+     */
+    public boolean getConfirmation() {
+        if (io.readString("Do you want to continue? (y/n)").equals("y")) {
+            return true;
+        }
+        return false;
     }
 
     // ######### DISPLAY ORDERS  #########
 
+    /**
+     * Display Order banner
+     */
     public void viewDisplayOrdersBanner() {
         io.print("Display Orders Menu: ");
 
     }
 
+    /**
+     * Displayers each order in the list of orders
+     * @param orders list of orders
+     */
     public void displayOrders(List<Order> orders) {
-
+        for (Order order : orders) {
+            displayOrderInfo(order); // helper function
+        }
+        io.readString("Please hit enter to continue.");
     }
 
-    public void displayOrderInfo(Order order) {
-        io.print(order.toString());
+    /**
+     * Order existence error message
+     */
+    public void viewOrderDoesNotExist() {
+        io.print("Order does not exist for that date.");
+        io.readString("Please hit enter to continue.");
     }
 
     // ######### ADD ORDER #########
 
+    /**
+     * Add Order banner
+     */
     public void viewAddOrderBanner() {
         io.print("Add an Order: ");
 
     }
 
     /**
-     *  query the user for each piece of order data necessary:
+     * Gets input for adding an order
      *
-     *     Order Date
-     *     Customer Name – May not be blank and is limited to characters [a-z][0-9]
-     *         as well as periods and comma characters. "Acme, Inc." is a valid name.
-     *     State – Entered states must be checked against the tax file.
-     *         If the state does not exist in the tax file, we cannot sell there.
-     *     Product Type – Show a list of available products and pricing information to choose from.
-     *     Area – The area must be a positive decimal. Minimum order size is 100 sq ft.
-     *
-     * @param taxes a list of all the available tax rates
-     * @param products a list of all the available products
-     * @return the Order object that was added
+     * @param taxes list of states and their tax rates
+     * @param products list of products and their prices
+     * @return partial order to add
      */
     public Order getAddOrderInput(List<Tax> taxes, List<Product> products) {
         // Date
         LocalDate date;
         do {
             date = getDateInput();
+
         } while (date == null);
 
         // Name
@@ -138,7 +198,6 @@ public class View {
         } while (area == null);
 
         // Create Order Object
-
         Order order = new Order();
         order.setOrderNumber(-1);
         order.setCustomerName(name);
@@ -153,6 +212,9 @@ public class View {
         return order;
     }
 
+    /**
+     * Successful Add Order banner
+     */
     public void viewSuccessAddOrder() {
         io.print("Add Order Successful.");
         io.readString("Please hit enter to continue. ");
@@ -160,21 +222,21 @@ public class View {
 
     // ######### EDIT ORDER #########
 
+    /**
+     * Edit Order Banner
+     */
     public void viewEditOrderBanner() {
         io.print("Edit an Order: ");
 
     }
 
-    public int getOrderNumberInput() {
-        return -1;
-
-    }
-
     public Order getEditOrderInput(Order order, List<Tax> taxes,  List<Product> products) {
         return null;
-
     }
 
+    /**
+     * Successful Edit Order banner
+     */
     public void viewSuccessEditOrder() {
         io.print("Edit Order Successful.");
         io.readString("Please hit enter to continue. ");
@@ -182,19 +244,17 @@ public class View {
 
     // ######### REMOVE ORDER #########
 
+    /**
+     * Remove Order banner
+     */
     public void viewRemoveOrderBanner() {
         io.print("Remove an Order: ");
 
     }
 
-    public boolean getConfirmation() {
-        if (io.readString("Do you want to continue? (y/n)").equals("y")) {
-            return true;
-        }
-        return false;
-
-    }
-
+    /**
+     * Successful Remove Order banner
+     */
     public void viewSuccessRemoveOrder() {
         io.print("Remove Order Successful.");
         io.readString("Please hit enter to continue. ");
@@ -202,11 +262,17 @@ public class View {
 
     // ######### EXPORT ALL DATA #########
 
+    /**
+     * Export All Data banner
+     */
     public void viewExportAllDataBanner() {
         io.print("Export All Data: ");
 
     }
 
+    /**
+     * Successful Export All Data banner
+     */
     public void viewSuccessExportAllData() {
         io.print("Export All Data Successful.");
         io.readString("Please hit enter to continue. ");
@@ -214,18 +280,12 @@ public class View {
 
     // ######### EXIT #########
 
+    /**
+     * Exit Message
+     */
     public void viewExitMessage() {
         io.print("Goodbye!");
 
-    }
-
-    public void displayErrorMessage(String message) {
-        io.print(message);
-
-    }
-
-    public void viewUnknownCommand() {
-        io.print("Unknown Command.");
     }
 
     // ######### VALIDATE #########
@@ -242,9 +302,11 @@ public class View {
         String regex = "^(?=.*[a-zA-Z0-9])[a-zA-Z0-9., ]+$";
 
         if (name.matches(regex)) {
+            // If valid
             return name;
         }
 
+        // If invalid
         io.print("Invalid Name.");
         io.print("Please enter a valid Name.");
         return null;
@@ -261,10 +323,12 @@ public class View {
     public Tax validateStateInput(String stateString, List<Tax> taxes) {
         for  (Tax tax : taxes) {
             if (tax.getStateName().equals(stateString)) {
+                // If valid
                 return tax;
             }
         }
 
+        // If invalid
         io.print("Invalid State.");
         io.print("We do not sell to that state.");
         return null;
@@ -280,10 +344,12 @@ public class View {
     public Product validateProductInput(String productString, List<Product> products) {
         for (Product product : products) {
             if (product.getProductType().equals(productString)) {
+                // If valid
                 return product;
             }
         }
 
+        // If invalid
         io.print("Invalid product.");
         io.print("We do not sell to that product.");
         return null;
@@ -297,15 +363,20 @@ public class View {
      * @return BigDecimal return BigDecimal object if valid, null if not
      */
     public BigDecimal validateAreaInput(String areaString) {
-        BigDecimal area = new BigDecimal(areaString);
-
-        if (areaString.trim().equals("")) {
-            io.print("Please enter a valid area");
+        BigDecimal area;
+        try {
+            area = new BigDecimal(areaString);
+        }  catch (Exception e) {
+            // If invalid
             return null;
-        } else if (area.intValue() >= 100) {
-            return  area;
         }
 
+        if (area.intValue() >= 100) {
+            // If valid
+            return area;
+        }
+
+        // If invalid (valid BigDecimal but too small)
         io.print("Invalid area.");
         io.print("Minimum order size is 100 sq ft.");
         return null;

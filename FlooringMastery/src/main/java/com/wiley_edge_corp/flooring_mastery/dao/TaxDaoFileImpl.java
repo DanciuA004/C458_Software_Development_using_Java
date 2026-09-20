@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 /**
- * Handles loading tax rate for each state from taxes.txt
+ * Reads from file and populates allTaxes with tax objects
  */
 public class TaxDaoFileImpl implements TaxDao {
     private static final String TAX_FILE = "sample/data/taxes.txt";
@@ -40,6 +40,11 @@ public class TaxDaoFileImpl implements TaxDao {
         }
     }
 
+    /**
+     * Get all tax objects
+     *
+     * @return list of tax objects
+     */
     @Override
     public List<Tax> getAllTaxes() {
         loadFile();

@@ -17,7 +17,7 @@ public interface OrderDao {
 
     public List<Order> getOrdersForDate(LocalDate date);
 
-    public Map<LocalDate, Map<Integer, Order>> getAllOrders();
+    public Map<LocalDate, Map<Integer, Order>> exportAllOrders();
 
     public Order removeOrder(LocalDate date, int orderNumber);
 }

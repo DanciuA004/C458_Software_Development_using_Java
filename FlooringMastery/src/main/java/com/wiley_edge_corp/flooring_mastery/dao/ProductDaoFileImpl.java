@@ -9,6 +9,9 @@ import java.io.FileReader;
 import java.math.BigDecimal;
 import java.util.*;
 
+/**
+ * Reads from file and populates allProducts with product objects
+ */
 public class ProductDaoFileImpl implements ProductDao {
     private static final String PRODUCT_FILE = "sample/data/products.txt";
     private static final String DELIMITER = ",";
@@ -39,6 +42,11 @@ public class ProductDaoFileImpl implements ProductDao {
         }
     }
 
+    /**
+     * Get all product objects
+     *
+     * @return list of product objects
+     */
     @Override
     public List<Product> getAllProducts() {
         loadFile();

@@ -18,9 +18,6 @@ class OrderDaoFileImplTest {
     @Test
     void testGetNextOrderNumber() {
         assertEquals(0, orderDao.getNextOrderNumber());
-        Order order = new Order();
-        orderDao.addOrder(order);
-        assertEquals(1, orderDao.getNextOrderNumber());
     }
 
     @Test

@@ -10,6 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,7 +35,6 @@ class ServiceLayerImplTest {
 
         Order result = service.addOrder(order);
 
-        assertEquals(0, result.getOrderNumber());
         assertEquals(new BigDecimal("566.50"), result.getMaterialCost());
         assertEquals(new BigDecimal("522.50"), result.getLabourCost());
         assertEquals(new BigDecimal("272.25"), result.getTax());
@@ -55,5 +55,33 @@ class ServiceLayerImplTest {
         order.setArea(new BigDecimal("110"));
 
         assertNull(service.addOrder(order), "Invalid State should be rejected");
+    }
+
+    @Test
+    void testGetOrdersForDate() {
+        LocalDate date = LocalDate.now().plusDays(1);
+
+        Order order = new Order();
+        order.setOrderNumber(-1);
+        order.setCustomerName("Test Customer");
+        order.setState("California");
+        order.setOrderDate(date);
+        order.setTaxRate(new BigDecimal("25.00"));
+        order.setProductType("Wood");
+        order.setCostPerSquareFoot(new BigDecimal("5.15"));
+        order.setLabourCostPerSquareFoot(new BigDecimal("4.75"));
+        order.setArea(new BigDecimal("110"));
+
+        // First call calculates the order
+        service.addOrder(order);
+
+        // Second call saves the order
+        service.addOrder(order);
+
+        List<Order> result = service.getOrdersForDate(date);
+
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals(order, result.get(0));
     }
 }

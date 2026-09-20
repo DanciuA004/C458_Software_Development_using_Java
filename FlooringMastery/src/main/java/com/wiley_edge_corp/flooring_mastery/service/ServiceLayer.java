@@ -11,6 +11,8 @@ public interface ServiceLayer {
 
     public int getNextOrderNumber();
 
+    public Order calculateOrder(Order order);
+
     public Order addOrder(Order order);
 
     public Order getOrder(LocalDate date, int orderNumber);
