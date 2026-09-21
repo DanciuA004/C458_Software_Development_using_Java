@@ -11,13 +11,22 @@ import java.util.*;
  * The order dao handles reading and writing to files of order objects
  */
 public class OrderDaoFileImpl implements OrderDao{
-    private static final String ORDER_FOLDER = "orders";
+    private String ORDER_FOLDER;
     private static final String DELIMITER = "::";
+    String exportFile;
     private Map<LocalDate, Map<Integer, Order>> orders =  new HashMap<>();
 
+    // For regular orders
     public OrderDaoFileImpl() {
+        ORDER_FOLDER = "orders";
+        exportFile = "export.txt";
         loadFromFile();
+    }
 
+    // For testing, Spring Di set up in test resources
+    public OrderDaoFileImpl(String ORDER_FOLDER, String exportFile) {
+        this.ORDER_FOLDER = ORDER_FOLDER;
+        this.exportFile = exportFile;
     }
 
     /**
@@ -39,33 +48,29 @@ public class OrderDaoFileImpl implements OrderDao{
         }
 
         // Create file writer
-        PrintWriter out = null;
-        try {
-            out = new PrintWriter(new FileWriter(fullPath));
-        } catch (IOException ex) {
-            // do nothing
+        try (PrintWriter out = new PrintWriter(new FileWriter(fullPath))) {
+
+            ordersOnDate = orders.get(date);
+
+            for (Order order : ordersOnDate.values()) {
+                out.println(
+                        order.getOrderNumber() + DELIMITER +
+                                order.getCustomerName() + DELIMITER +
+                                order.getState() + DELIMITER +
+                                order.getTaxRate() + DELIMITER +
+                                order.getProductType() + DELIMITER +
+                                order.getArea() + DELIMITER +
+                                order.getCostPerSquareFoot() + DELIMITER +
+                                order.getLabourCostPerSquareFoot() + DELIMITER +
+                                order.getMaterialCost() + DELIMITER +
+                                order.getLabourCost() + DELIMITER +
+                                order.getTax() + DELIMITER +
+                                order.getTotal()
+                );
+            }
+        } catch (Exception e) {
+
         }
-
-        // For each order write it to the file
-        for (Order order : ordersOnDate.values()) {
-            String orderAsString = order.getOrderNumber() + DELIMITER +
-                    order.getCustomerName() + DELIMITER +
-                    order.getState() + DELIMITER +
-                    order.getTaxRate() + DELIMITER +
-                    order.getProductType() + DELIMITER +
-                    order.getArea() + DELIMITER +
-                    order.getCostPerSquareFoot() + DELIMITER +
-                    order.getLabourCostPerSquareFoot() + DELIMITER +
-                    order.getMaterialCost() + DELIMITER +
-                    order.getLabourCost() + DELIMITER +
-                    order.getTax() + DELIMITER +
-                    order.getTotal();
-
-            out.println(orderAsString);
-        }
-
-        out.flush();
-        out.close();
     }
 
     /**
@@ -229,6 +234,7 @@ public class OrderDaoFileImpl implements OrderDao{
     public Order getOrder(LocalDate date, int orderNumber) {
         Map<Integer, Order> ordersOnDate;
         Order order;
+
         try {
             ordersOnDate = orders.get(date);
             order = ordersOnDate.get(orderNumber);
@@ -250,11 +256,6 @@ public class OrderDaoFileImpl implements OrderDao{
         // Write to memory location
         Map<Integer, Order> ordersOnDate = orders.get(order.getOrderDate());
 
-        // If map doesn't exist return null
-        if (ordersOnDate == null) {
-            return null;
-        }
-
         // Put the order into the map
         ordersOnDate.put(order.getOrderNumber(), order);
 
@@ -266,7 +267,6 @@ public class OrderDaoFileImpl implements OrderDao{
         }
 
         return order;
-
     }
 
     /**
@@ -294,11 +294,9 @@ public class OrderDaoFileImpl implements OrderDao{
      */
     @Override
     public Map<LocalDate, Map<Integer, Order>> exportAllOrders() {
-        String fileName = "export.txt";
-
         try {
             // Create file writer
-            PrintWriter out = new PrintWriter(new FileWriter(fileName));
+            PrintWriter out = new PrintWriter(new FileWriter(exportFile));
 
             // for each date
             for (Map.Entry<LocalDate, Map<Integer, Order>> dateEntry : orders.entrySet()) {
@@ -336,7 +334,7 @@ public class OrderDaoFileImpl implements OrderDao{
             out.close();
 
         } catch (Exception e) {
-
+            // do nothing
         }
 
         return orders;
@@ -354,7 +352,6 @@ public class OrderDaoFileImpl implements OrderDao{
         // Map of orders for date
         Map<Integer, Order> ordersOnDate = orders.get(date);
 
-        // If there are no orders for that date
         if (ordersOnDate == null) {
             return null;
         }
@@ -362,7 +359,7 @@ public class OrderDaoFileImpl implements OrderDao{
         // Remove object
         Order removedOrder = ordersOnDate.remove(orderNumber);
 
-        if (removedOrder == null) {
+        if  (removedOrder == null) {
             return null;
         }
 

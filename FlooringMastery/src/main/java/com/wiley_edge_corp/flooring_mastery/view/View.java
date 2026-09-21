@@ -53,6 +53,14 @@ public class View {
     }
 
     /**
+     * Order existence error message
+     */
+    public void viewOrderDoesNotExist() {
+        io.print("Order does not exist.");
+        io.readString("Please hit enter to continue.");
+    }
+
+    /**
      * Integer input error message
      */
     public void viewIncorrectNumberInput() {
@@ -122,14 +130,6 @@ public class View {
         for (Order order : orders) {
             displayOrderInfo(order); // helper function
         }
-        io.readString("Please hit enter to continue.");
-    }
-
-    /**
-     * Order existence error message
-     */
-    public void viewOrderDoesNotExist() {
-        io.print("Order does not exist for that date.");
         io.readString("Please hit enter to continue.");
     }
 
@@ -269,6 +269,7 @@ public class View {
         if (stateString.equals("")) {
             // set state to old state
             order.setState(orderSaved.getState());
+            order.setTaxRate(orderSaved.getTaxRate());
 
         } else {
 

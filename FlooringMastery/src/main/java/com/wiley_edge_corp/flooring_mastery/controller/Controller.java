@@ -186,7 +186,7 @@ public class Controller {
             view.viewOrderDoesNotExist();
         } else {
             // If order does exist
-            view.viewSuccessExportAllData();
+            view.viewSuccessRemoveOrder();
         }
     }
 

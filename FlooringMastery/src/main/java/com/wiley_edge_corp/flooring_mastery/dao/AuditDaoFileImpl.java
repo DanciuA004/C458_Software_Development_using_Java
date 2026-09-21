@@ -8,7 +8,15 @@ import java.io.PrintWriter;
  * The audit dao handles writing to audit file for order add and order remove
  */
 public class AuditDaoFileImpl implements AuditDao {
-    private static final String AUDIT_FILE = "audit.txt";
+    private String AUDIT_FILE = "audit.txt";
+
+    public AuditDaoFileImpl() {
+        AUDIT_FILE = "audit.txt";
+    }
+
+    public AuditDaoFileImpl(String AUDIT_FILE) {
+        this.AUDIT_FILE = AUDIT_FILE;
+    }
 
     /**
      * Write to audit file
