@@ -17,7 +17,7 @@ public interface ServiceLayer {
 
     public Order getOrder(LocalDate date, int orderNumber);
 
-    public Order editOrder(LocalDate date, int orderNumber);
+    public Order editOrder(Order order);
 
     public List<Order> getOrdersForDate(LocalDate date);
 

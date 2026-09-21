@@ -7,13 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 public interface OrderDao {
+
     public int getNextOrderNumber();
 
     public Order addOrder(Order order);
 
     public Order getOrder(LocalDate date, int orderNumber);
 
-    public Order editOrder(LocalDate date, int orderNumber);
+    public Order editOrder(Order order);
 
     public List<Order> getOrdersForDate(LocalDate date);
 

@@ -118,9 +118,45 @@ public class Controller {
         }
     }
 
+    /**
+     * Edit some values of an existing order
+     */
     public void editOrder() {
         view.viewEditOrderBanner();
-        // EVIIIIILLL
+
+        // Initiates taxes and products
+        List<Tax> taxes = service.getTaxes();
+        List<Product> products = service.getProducts();
+
+        // Date
+        LocalDate date = view.getDateInput();
+        while (date == null) {
+            date = view.getDateInput();
+        }
+
+        // Order Number
+        int orderNumber = view.getOrderNumberInput();
+        while (orderNumber == -1) {
+            view.viewIncorrectNumberInput();
+            orderNumber = view.getOrderNumberInput();
+        }
+
+        // Get saved order
+        Order orderSaved = service.getOrder(date, orderNumber);
+
+        if  (orderSaved == null) {
+            view.viewOrderDoesNotExist();
+
+        } else {
+            // Get new order details
+            Order newOrder = view.getEditOrderInput(orderSaved, taxes, products);
+
+            // Get confirmation
+            if (view.getConfirmation()) {
+                service.editOrder(newOrder);
+                view.viewSuccessEditOrder();
+            }
+        }
     }
 
     /**
@@ -160,6 +196,7 @@ public class Controller {
     public void exportAllData() {
         view.viewExportAllDataBanner();
         service.exportAllData();
+        view.viewSuccessExportAllData();
     }
 
     /**

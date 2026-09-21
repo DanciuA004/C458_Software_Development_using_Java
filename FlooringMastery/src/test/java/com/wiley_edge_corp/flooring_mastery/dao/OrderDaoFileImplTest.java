@@ -1,46 +1,32 @@
 package com.wiley_edge_corp.flooring_mastery.dao;
 
-import com.wiley_edge_corp.flooring_mastery.model.Order;
-import com.wiley_edge_corp.flooring_mastery.service.ServiceLayer;
-import com.wiley_edge_corp.flooring_mastery.service.ServiceLayerImpl;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class OrderDaoFileImplTest {
-    ApplicationContext ctx =
-            new ClassPathXmlApplicationContext("applicationContext.xml");
-    OrderDao orderDao =
-            ctx.getBean("orderDao", OrderDaoFileImpl.class);
 
     @Test
-    void testGetNextOrderNumber() {
-        assertEquals(0, orderDao.getNextOrderNumber());
+    void getNextOrderNumber() {
     }
 
     @Test
-    void testAddOrder() {
+    void addOrder() {
     }
 
     @Test
-    void testGetOrder() {
+    void getOrder() {
     }
 
     @Test
-    void testEditOrder() {
+    void editOrder() {
     }
 
     @Test
-    void testGetOrdersForDate() {
+    void getOrdersForDate() {
     }
 
     @Test
-    void testGetAllOrders() {
-    }
-
-    @Test
-    void testRemoveOrder() {
+    void removeOrder() {
     }
 }

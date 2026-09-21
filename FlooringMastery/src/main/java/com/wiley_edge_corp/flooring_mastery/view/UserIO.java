@@ -1,6 +1,7 @@
 package com.wiley_edge_corp.flooring_mastery.view;
 
 public interface UserIO {
+
     void print(String msg);
 
     double readDouble(String prompt);

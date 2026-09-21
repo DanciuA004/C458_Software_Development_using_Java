@@ -49,8 +49,10 @@ public class ServiceLayerImpl implements ServiceLayer {
             return null;
         }
 
-        // Order date
-        order.setOrderNumber(getNextOrderNumber());
+        // Order number
+        if (order.getOrderNumber() == -1) {
+            order.setOrderNumber(getNextOrderNumber());
+        }
 
         // MaterialCost = (Area * CostPerSquareFoot)
         order.setMaterialCost(order.getArea().multiply(order.getCostPerSquareFoot())
@@ -88,16 +90,28 @@ public class ServiceLayerImpl implements ServiceLayer {
         return order;
     }
 
+    /**
+     * Get the information
+     *
+     * @param date date for order
+     * @param orderNumber order number
+     * @return order object
+     */
     @Override
     public Order getOrder(LocalDate date, int orderNumber) {
-        return null;
+        return orderDao.getOrder(date, orderNumber);
 
     }
 
     @Override
-    public Order editOrder(LocalDate date, int orderNumber) {
-        return null;
-
+    public Order editOrder(Order order) {
+        // Recalculate the order in case state, product or area changed
+        calculateOrder(order);
+        // write to audit
+        writeToAudit("Edit order: " + order.getOrderNumber());
+        // save edited order
+        orderDao.editOrder(order);
+        return order;
     }
 
     /**
@@ -123,7 +137,6 @@ public class ServiceLayerImpl implements ServiceLayer {
     public Order removeOrder(LocalDate date, int orderNumber) {
         writeToAudit("Remove order: " +  orderNumber);
         return orderDao.removeOrder(date, orderNumber);
-
     }
 
     /**

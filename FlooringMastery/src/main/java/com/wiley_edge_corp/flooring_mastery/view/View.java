@@ -110,7 +110,7 @@ public class View {
      * Display Order banner
      */
     public void viewDisplayOrdersBanner() {
-        io.print("Display Orders Menu: ");
+        io.print("  Display Orders Menu: ");
 
     }
 
@@ -139,7 +139,7 @@ public class View {
      * Add Order banner
      */
     public void viewAddOrderBanner() {
-        io.print("Add an Order: ");
+        io.print("  Add an Order: ");
 
     }
 
@@ -226,12 +226,122 @@ public class View {
      * Edit Order Banner
      */
     public void viewEditOrderBanner() {
-        io.print("Edit an Order: ");
+        io.print("  Edit an Order: ");
 
     }
 
-    public Order getEditOrderInput(Order order, List<Tax> taxes,  List<Product> products) {
-        return null;
+    /**
+     * Get details to edit an order
+     *
+     * @param orderSaved the order they are editing, used for printing values and saving same values
+     * @param taxes list of states and their tax rates
+     * @param products list of all products and prices
+     * @return the new edited order object
+     */
+    public Order getEditOrderInput(Order orderSaved, List<Tax> taxes,  List<Product> products) {
+        Order order = new Order();
+        order.setOrderNumber(orderSaved.getOrderNumber());
+        order.setOrderDate(orderSaved.getOrderDate());
+
+        // Name
+        io.print("Current Name: " + orderSaved.getCustomerName());
+        String name = io.readString("Enter New Name: ");
+
+        // If user wants to keep current name
+        if (name.equals("")) {
+            // set name to old name
+            order.setCustomerName(orderSaved.getCustomerName());
+
+        } else {
+            // else get new name
+            while (validateNameInput(name) == null) {
+                name = io.readString("Enter New Name: ");
+            }
+            // set new name
+            order.setCustomerName(name);
+        }
+
+        // State
+        io.print("Current State: " + orderSaved.getState());
+        String stateString = io.readString("Enter New State: ");
+
+        // If user wants to keep current state
+        if (stateString.equals("")) {
+            // set state to old state
+            order.setState(orderSaved.getState());
+
+        } else {
+
+            Tax state = validateStateInput(stateString, taxes);
+            while (state == null) {
+                // else get new state
+                stateString = io.readString("Enter State: ");
+                state = validateStateInput(stateString, taxes);
+            }
+            // set new state
+            order.setState(state.getStateName());
+            order.setTaxRate(state.getTaxRate());
+        }
+
+        // Product
+        io.print("Current Product Name: " + orderSaved.getProductType());
+
+        // print all products
+        io.print("Products: ");
+        for (Product p : products) {
+            io.print("  " + p.toString());
+        }
+
+        String productString = io.readString("Enter Product Name: ");
+
+        // If user wants to keep current product
+        if  (productString.equals("")) {
+            // set product to old product
+            order.setProductType(orderSaved.getProductType());
+            order.setCostPerSquareFoot(orderSaved.getCostPerSquareFoot());
+            order.setLabourCostPerSquareFoot(orderSaved.getLabourCostPerSquareFoot());
+
+        } else {
+            // else get new product
+            Product product = validateProductInput(productString, products);
+            while (product == null) {
+                io.print("Products: ");
+                for (Product p : products) {
+                    io.print("  " + p.toString());
+                }
+
+                productString = io.readString("Enter Product Name: ");
+                product = validateProductInput(productString, products);
+            }
+            // set new order product
+            order.setProductType(product.getProductType());
+            order.setCostPerSquareFoot(product.getCostPerSquareFoot());
+            order.setLabourCostPerSquareFoot(product.getLabourCostPerSquareFoot());
+        }
+
+        // Area
+        io.print("Current Area: " + orderSaved.getArea());
+        String areaString = io.readString("Enter Area: ");
+
+        // if user wants to keep current area
+        if (areaString.equals("")) {
+            // set area to old area
+            order.setArea(orderSaved.getArea());
+
+        } else {
+            // else get new area
+            BigDecimal area = validateAreaInput(areaString);
+
+            while (area == null) {
+                areaString = io.readString("Enter Area: ");
+                area = validateAreaInput(areaString);
+            }
+
+            // set new order area
+            order.setArea(area);
+        }
+
+        return order;
     }
 
     /**
@@ -248,7 +358,7 @@ public class View {
      * Remove Order banner
      */
     public void viewRemoveOrderBanner() {
-        io.print("Remove an Order: ");
+        io.print("  Remove an Order: ");
 
     }
 
@@ -266,7 +376,7 @@ public class View {
      * Export All Data banner
      */
     public void viewExportAllDataBanner() {
-        io.print("Export All Data: ");
+        io.print("  Export All Data: ");
 
     }
 
@@ -284,7 +394,7 @@ public class View {
      * Exit Message
      */
     public void viewExitMessage() {
-        io.print("Goodbye!");
+        io.print("  Goodbye!");
 
     }
 

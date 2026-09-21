@@ -26,7 +26,6 @@
         <constructor-arg ref="taxDao"/>
         <constructor-arg ref="productDao"/>
         <constructor-arg ref="orderDao"/>
-        <constructor-arg ref="exportDao"/>
         <constructor-arg ref="auditDao"/>
     </bean>
 
@@ -35,8 +34,6 @@
     <bean id="productDao" class="com.wiley_edge_corp.flooring_mastery.dao.ProductDaoFileImpl"/>
 
     <bean id="orderDao" class="com.wiley_edge_corp.flooring_mastery.service.OrderDaoStubImpl"/>
-
-    <bean id="exportDao" class="com.wiley_edge_corp.flooring_mastery.dao.ExportDaoFileImpl"/>
 
     <bean id="auditDao" class="com.wiley_edge_corp.flooring_mastery.dao.AuditDaoFileImpl"/>
 

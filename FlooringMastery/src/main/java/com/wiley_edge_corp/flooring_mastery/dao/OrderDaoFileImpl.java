@@ -14,7 +14,6 @@ public class OrderDaoFileImpl implements OrderDao{
     private static final String ORDER_FOLDER = "orders";
     private static final String DELIMITER = "::";
     private Map<LocalDate, Map<Integer, Order>> orders =  new HashMap<>();
-    private int largestOrderNumber = -1;
 
     public OrderDaoFileImpl() {
         loadFromFile();
@@ -102,7 +101,7 @@ public class OrderDaoFileImpl implements OrderDao{
         } catch (Exception e) {
 
         }
-        
+
         out.flush();
         out.close();
     }
@@ -224,17 +223,49 @@ public class OrderDaoFileImpl implements OrderDao{
      *
      * @param date order date
      * @param orderNumber order number
-     * @return order object
+     * @return order object, or null if order does not exist
      */
     @Override
     public Order getOrder(LocalDate date, int orderNumber) {
-        Map<Integer, Order> ordersOnDate = orders.get(date);
-        return ordersOnDate.get(orderNumber);
+        Map<Integer, Order> ordersOnDate;
+        Order order;
+        try {
+            ordersOnDate = orders.get(date);
+            order = ordersOnDate.get(orderNumber);
+        } catch (Exception e) {
+            return null;
+        }
+
+        return order;
     }
 
+    /**
+     * Adds an edited order to orders
+     *
+     * @param order edited order to add
+     * @return returns order object
+     */
     @Override
-    public Order editOrder(LocalDate date, int orderNumber) {
-        return null;
+    public Order editOrder(Order order) {
+        // Write to memory location
+        Map<Integer, Order> ordersOnDate = orders.get(order.getOrderDate());
+
+        // If map doesn't exist return null
+        if (ordersOnDate == null) {
+            return null;
+        }
+
+        // Put the order into the map
+        ordersOnDate.put(order.getOrderNumber(), order);
+
+        // Write to file
+        try {
+            writeToFile(order.getOrderDate());
+        } catch (Exception e) {
+            // do nothing
+        }
+
+        return order;
 
     }
 
