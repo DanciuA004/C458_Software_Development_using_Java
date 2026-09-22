@@ -23,10 +23,10 @@
     <bean id="io" class="com.wiley_edge_corp.flooring_mastery.view.UserIOConsoleImpl"/>
 
     <bean id="service" class="com.wiley_edge_corp.flooring_mastery.service.ServiceLayerImpl">
-        <constructor-arg ref="taxDao"/>
-        <constructor-arg ref="productDao"/>
-        <constructor-arg ref="orderDaoStub"/>
         <constructor-arg ref="auditDao"/>
+        <constructor-arg ref="orderDaoStub"/>
+        <constructor-arg ref="productDao"/>
+        <constructor-arg ref="taxDao"/>
     </bean>
 
     <bean id="taxDao" class="com.wiley_edge_corp.flooring_mastery.dao.TaxDaoFileImpl"/>
@@ -40,7 +40,9 @@
         <constructor-arg value="test/export.txt"/>
     </bean>
 
-    <bean id="auditDao" class="com.wiley_edge_corp.flooring_mastery.dao.AuditDaoFileImpl"/>
+    <bean id="auditDao" class="com.wiley_edge_corp.flooring_mastery.dao.AuditDaoFileImpl">
+        <constructor-arg value="test/audit.txt"/>
+    </bean>
 
     <bean id="controller" class="com.wiley_edge_corp.flooring_mastery.controller.Controller">
         <constructor-arg ref="service"/>

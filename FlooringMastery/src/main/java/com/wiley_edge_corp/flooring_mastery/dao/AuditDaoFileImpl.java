@@ -12,10 +12,12 @@ public class AuditDaoFileImpl implements AuditDao {
 
     public AuditDaoFileImpl() {
         AUDIT_FILE = "audit.txt";
+
     }
 
     public AuditDaoFileImpl(String AUDIT_FILE) {
         this.AUDIT_FILE = AUDIT_FILE;
+
     }
 
     /**
@@ -25,16 +27,10 @@ public class AuditDaoFileImpl implements AuditDao {
      */
     @Override
     public void writeAuditEntry(String message) {
-        PrintWriter out = null;
-
-        try {
-            out = new PrintWriter(new FileWriter(AUDIT_FILE, true));
+        try (PrintWriter out = new PrintWriter(new FileWriter(AUDIT_FILE, true))) {
             out.println(message);
-        } catch (Exception e) {
-            // Do nothing
-        }
+        } catch (IOException e) {
 
-        out.flush();
-        out.close();
+        }
     }
 }
