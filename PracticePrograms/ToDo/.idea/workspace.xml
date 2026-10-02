@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a691e08a-7254-4dc5-8cb1-b78119c87eec" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../AjaxWithjQuery/.idea/AjaxWithjQuery.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimpleSpringMVC/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimpleSpringMVC/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimpleSpringMVC/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimpleSpringMVC/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimpleSpringMVC/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimpleSpringMVC/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimpleSpringMVC/src/main/resources/META-INF/maven/archetype.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimpleSpringMVC/src/main/resources/archetype-resources/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimpleSpringMVC/src/main/resources/archetype-resources/src/main/java/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SimpleSpringMVC/src/main/resources/archetype-resources/src/test/java/AppTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/maven/archetype.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/src/main/java/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/archetype-resources/src/test/java/AppTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.github/workflows/maven.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.github/workflows/maven.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;DanciuA004&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/DanciuA004/C458-Software-Development-using-Java.git&quot;,
+    &quot;accountId&quot;: &quot;00e0fb15-392a-4696-90d5-88ee0533e1f6&quot;
+  }
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000111000280234" />
+      <entry key="S2" value="1.1106441976403936" />
+      <entry key="S5" value="1.9609989526594482" />
+      <entry key="S10" value="3.3386494625240064" />
+      <entry key="S30" value="5.723709834933341" />
+      <entry key="S60" value="6.8273217714748275" />
+      <entry key="M2" value="7.796880908602623" />
+      <entry key="M5" value="9.231855659136038" />
+      <entry key="M10" value="10.725945252338885" />
+      <entry key="M15" value="12.363121512227826" />
+      <entry key="M30" value="18.07357128620588" />
+      <entry key="H1" value="26.174441282044235" />
+      <entry key="H2" value="33.327319587977584" />
+      <entry key="H4" value="38.12829492608429" />
+      <entry key="D1" value="42.93719848651454" />
+      <entry key="W1" value="43.845967725745616" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="2.6880789063615123E-263" />
+      <entry key="S10" value="8.420510338517767E-132" />
+      <entry key="S30" value="4.611786225839969E-44" />
+      <entry key="S60" value="4.5160664962485115E-22" />
+      <entry key="M2" value="4.841329183559317E-11" />
+      <entry key="M5" value="2.1347150795314378E-4" />
+      <entry key="M10" value="0.03559292223985483" />
+      <entry key="M15" value="0.1963625989709107" />
+      <entry key="M30" value="1.08470466463438" />
+      <entry key="H1" value="2.550680999000005" />
+      <entry key="H2" value="3.9118721930574476" />
+      <entry key="H4" value="4.844658446409307" />
+      <entry key="D1" value="5.789875630893208" />
+      <entry key="W1" value="5.9695214561534184" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9460576467255959" />
+      <entry key="MS500" value="0.9889819381615669" />
+      <entry key="S2" value="1.1076550468343649" />
+      <entry key="S5" value="1.9576540288059818" />
+      <entry key="S10" value="3.3317638199093396" />
+      <entry key="S30" value="5.7161157714050805" />
+      <entry key="S60" value="6.822118031423523" />
+      <entry key="M2" value="7.793759537164477" />
+      <entry key="M5" value="9.230197318837659" />
+      <entry key="M10" value="10.759713994393126" />
+      <entry key="M15" value="12.55707612870423" />
+      <entry key="M30" value="19.15453523844684" />
+      <entry key="H1" value="28.721357704992332" />
+      <entry key="H2" value="37.23646325413225" />
+      <entry key="H4" value="42.97130404792142" />
+      <entry key="D1" value="48.72675155792171" />
+      <entry key="W1" value="49.815441813984286" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3K60GN6IgOUI2evumfUvJVG1Lzm" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.App.executor&quot;: &quot;Run&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-a203e0a19954-intellij.indexing.shared.core-IU-262.10968.63" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.10968.63" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a691e08a-7254-4dc5-8cb1-b78119c87eec" name="Changes" comment="" />
+      <created>1790862615124</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1790862615124</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
